@@ -44,6 +44,10 @@ class NewsViewModel: NSObject {
         return self.newsItem.publishedAt ?? ""
     }
     
+    var newsUrl: String? {
+        return self.newsItem.url
+    }
+    
     var newsImage: UIImage? {
         downloadNewsImages()
         return imageNews

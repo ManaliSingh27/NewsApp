@@ -17,12 +17,15 @@ class NewsDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
    
+    @IBOutlet weak var openUrlButton: UIButton!
     var newsViewModel: NewsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         newsViewModel.delegate = self
         showNewsDetails()
+        guard newsViewModel.newsUrl != nil else { return }
+        openUrlButton.isHidden = false
         // Do any additional setup after loading the view.
     }
 
@@ -32,9 +35,13 @@ class NewsDetailViewController: UIViewController {
         authorLabel.text = newsViewModel.authorName
         contentLabel.text = newsViewModel.contentText
         descriptionLabel.text = newsViewModel.descriptionText
-        dateLabel.text = newsViewModel.publishedDate
+        dateLabel.text = newsViewModel.publishedDate.formattedPublishedDate()
     }
 
+    @IBAction func openNewsUrl(_ sender: UIButton) {
+        guard let url = URL(string: newsViewModel.newsUrl!) else { return }
+        UIApplication.shared.open(url)
+    }
     /*
     // MARK: - Navigation
 

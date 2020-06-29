@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,23 +18,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YL7-xp-M7g">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                        <rect key="frame" x="0.0" y="10" width="100" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="U3X-ps-oD6"/>
                             <constraint firstAttribute="height" constant="50" id="rkd-4z-P0q"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cg-07-wz9">
-                        <rect key="frame" x="108" y="10" width="212" height="24"/>
+                        <rect key="frame" x="108" y="8" width="212" height="26"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6cg-07-wz9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Foe-xf-6MN"/>
+                    <constraint firstItem="6cg-07-wz9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Foe-xf-6MN"/>
                     <constraint firstItem="YL7-xp-M7g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Joy-P5-O0T"/>
-                    <constraint firstItem="YL7-xp-M7g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RDw-ik-Ojx"/>
+                    <constraint firstItem="YL7-xp-M7g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="RDw-ik-Ojx"/>
                     <constraint firstAttribute="bottom" secondItem="6cg-07-wz9" secondAttribute="bottom" constant="10" id="hkN-Va-azA"/>
                     <constraint firstAttribute="trailing" secondItem="6cg-07-wz9" secondAttribute="trailing" id="pQI-jj-pOg"/>
                     <constraint firstItem="6cg-07-wz9" firstAttribute="leading" secondItem="YL7-xp-M7g" secondAttribute="trailing" constant="8" id="qPA-qh-Wbk"/>
