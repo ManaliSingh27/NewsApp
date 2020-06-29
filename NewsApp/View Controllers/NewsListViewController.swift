@@ -54,6 +54,15 @@ extension NewsListViewController: UITableViewDataSource {
     
 }
 
+extension NewsListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = NewsDetailViewController(nibName: "NewsDetailViewController", bundle: nil)
+        vc.newsViewModel = self.newsListViewModel.newsAtIndex(index:indexPath.row)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
 extension NewsListViewController: NewsListViewModelDelegate {
     func parseNewsItemsSuccess() {
         DispatchQueue.main.async {

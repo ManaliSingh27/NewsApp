@@ -28,6 +28,22 @@ class NewsViewModel: NSObject {
         return self.newsItem.title ?? ""
     }
     
+    var authorName: String {
+        return self.newsItem.author ?? ""
+    }
+    
+    var descriptionText: String {
+        return self.newsItem.description ?? ""
+    }
+    
+    var contentText: String {
+        return self.newsItem.content ?? ""
+    }
+    
+    var publishedDate: String {
+        return self.newsItem.publishedAt ?? ""
+    }
+    
     var newsImage: UIImage? {
         downloadNewsImages()
         return imageNews

@@ -24,6 +24,8 @@
 		DF401DFE24AA70BB000A8835 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF401DFD24AA70BB000A8835 /* NetworkLayer.swift */; };
 		DF401E0024AA82E7000A8835 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF401DFF24AA82E7000A8835 /* ImageDownloader.swift */; };
 		DF401E0224AA836A000A8835 /* NewsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF401E0124AA836A000A8835 /* NewsCellViewModel.swift */; };
+		DF401E0524AA9866000A8835 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF401E0324AA9866000A8835 /* NewsDetailViewController.swift */; };
+		DF401E0624AA9866000A8835 /* NewsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF401E0424AA9866000A8835 /* NewsDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		DF401DFD24AA70BB000A8835 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		DF401DFF24AA82E7000A8835 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		DF401E0124AA836A000A8835 /* NewsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellViewModel.swift; sourceTree = "<group>"; };
+		DF401E0324AA9866000A8835 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		DF401E0424AA9866000A8835 /* NewsDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 		DF401DED24AA3C58000A8835 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DF401E0324AA9866000A8835 /* NewsDetailViewController.swift */,
 				DF401DE124AA33FA000A8835 /* NewsListViewController.swift */,
 				DF401DE924AA3923000A8835 /* NewsCell.swift */,
 			);
@@ -145,6 +150,7 @@
 			children = (
 				DF401DE224AA33FA000A8835 /* NewsListViewController.xib */,
 				DF401DEA24AA3923000A8835 /* NewsCell.xib */,
+				DF401E0424AA9866000A8835 /* NewsDetailViewController.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF401E0624AA9866000A8835 /* NewsDetailViewController.xib in Resources */,
 				DF401DCC24AA325B000A8835 /* LaunchScreen.storyboard in Resources */,
 				DF401DC924AA325B000A8835 /* Assets.xcassets in Resources */,
 				DF401DEC24AA3923000A8835 /* NewsCell.xib in Resources */,
@@ -280,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF401E0524AA9866000A8835 /* NewsDetailViewController.swift in Sources */,
 				DF401DFE24AA70BB000A8835 /* NetworkLayer.swift in Sources */,
 				DF401DC024AA3258000A8835 /* AppDelegate.swift in Sources */,
 				DF401DC224AA3258000A8835 /* SceneDelegate.swift in Sources */,
