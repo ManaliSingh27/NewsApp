@@ -28,7 +28,6 @@ class NewsCell: UITableViewCell, NewsImageDownloaded {
         self.titleLabel.text = viewModel.newsTitle
         self.newsImageView.image = nil
         self.newsImageView.image = viewModel.newsImage
-       // viewModel.downloadNewsImages()
     }
     
     func newsImageDownloaded(image: UIImage) {

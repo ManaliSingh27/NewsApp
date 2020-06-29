@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol NewsImageDownloaded : class
+{
+    func newsImageDownloaded(image : UIImage)
+}
+
 class NewsViewModel: NSObject {
     
     private var newsItem: News

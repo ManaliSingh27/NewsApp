@@ -16,8 +16,6 @@ protocol NewsListViewModelDelegate: class {
 
 class NewsListViewModel: NSObject {
     private var parserObj  = NewsParser()
-    let imageCache = NSCache<NSString, UIImage>()
-
     weak var delegate: NewsListViewModelDelegate?
     private var newsItems: [News] {
         didSet {
@@ -29,7 +27,6 @@ class NewsListViewModel: NSObject {
         self.newsItems = [News]()
         self.delegate = delegate
     }
-    
     
     
     func downloadNewsData()
