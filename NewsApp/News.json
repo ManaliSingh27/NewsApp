@@ -1,0 +1,59 @@
+{
+"status": "ok",
+"totalResults": 3403,
+"articles": [
+{
+"source": {
+"id": "rt",
+"name": "RT"
+},
+"author": "RT",
+"title": "Currency or commodity? 61% of bitcoin sitting dormant in wallets for over a year",
+"description": "A whopping 61 percent of bitcoin has not been moved out of owners’ wallets in over a year, sparking debate on what the high figure means for the cryptocurrency, with some saying it is going through an identity crisis. Read Full Article at RT.com",
+"url": "https://www.rt.com/news/493249-bitcoin-not-moving-bull/",
+"urlToImage": "https://cdni.rt.com/files/2020.06/article/5ef9fb4a85f540747571d71d.JPG",
+"publishedAt": "2020-06-29T14:41:27Z",
+"content": "June 28’s most upvoted Reddit post on bitcoin centered on the inactive nature of the cryptocurrency.\r\nThe post, which sources its information from blockchain data and intelligence provider Glassnode,… [+2110 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "Seeking Alpha"
+},
+"author": "Lyn Alden Schwartzer",
+"title": "An Unstoppable Force Vs. An Immovable Object",
+"description": "A record amount of stimulus has supported equity markets, while the economy continues to face serious issues. The U.S. has higher unemployment rates than many d",
+"url": "https://seekingalpha.com/article/4356165-unstoppable-force-vs-immovable-object",
+"urlToImage": "https://static.seekingalpha.com/uploads/2020/6/28/saupload_full-1c44fdfdd09b5bd7071f6c7f276b36595f34301f.png",
+"publishedAt": "2020-06-29T14:34:53Z",
+"content": "In the world of finance, we're witnessing an unstoppable force colliding with an unmovable object, and that impact between such massive things is causing all sorts of interesting behavior in the mark… [+18351 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "Cointelegraph"
+},
+"author": "Cointelegraph By Adrian Zmudzinski",
+"title": "OKEx Announced The Listing of Compound DeFi Protocol's COMP Token",
+"description": "COMP spot trading against USDT started at 6 AM UTC today.",
+"url": "https://cointelegraph.com/news/okex-announced-the-listing-of-compound-defi-protocols-comp-token",
+"urlToImage": "https://s3.cointelegraph.com/storage/uploads/view/d4c868ecc4f3dc91920d7191de53a84a.jpg",
+"publishedAt": "2020-06-29T14:25:00Z",
+"content": "Cryptocurrency exchange OKEx have just listed Compounds COMP token for trade. \r\nCOMP is the native token of Compound a DeFi protocol that allows its users to earn interest on deposits or lend cryptoc… [+500 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "CoinDesk"
+},
+"author": "Paddy Baker",
+"title": "Chinese Bitcoin Mining Giant Ebang Is Launching an Offshore Exchange",
+"description": "Ebang, the world's second-largest producer of bitcoin mining equipment, hopes an exchange could double total revenue by 2022.",
+"url": "https://www.coindesk.com/chinese-mining-giant-ebang-offshore-crypto-exchange",
+"urlToImage": "https://static.coindesk.com/wp-content/uploads/2018/02/miner.jpg",
+"publishedAt": "2020-06-29T14:17:56Z",
+"content": "The world’s second-largest maker in bitcoin mining equipment hopes launching its own exchange could double total revenue by 2022. \r\nIn an interview with Bloomberg BNN, CFO Chen Lei confirmed the Hang… [+1519 chars]"
+}
+]
+
+}
