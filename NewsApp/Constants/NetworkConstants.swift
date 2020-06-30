@@ -9,5 +9,5 @@
 import Foundation
 
 struct NetworkConstants {
-    static let API_KEY = "YOUR_KEY_HERE"
+    static let API_KEY = "Your_Key_Here"
 }
