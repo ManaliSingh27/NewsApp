@@ -79,7 +79,7 @@ class NetworkManager {
             } else {
                 let image = UIImage.init(data: data)
                 ImageCache.saveImage(image: image, url: url)
-                completion(.Success(image!))
+                completion(.Success(image ?? UIImage(named: "NewsPlaceholder")!))
             }
             
         })
