@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 struct ErrorConstants {
     static let kParsingFailedError: String = "Parsing Failed"
     static let kError: String = "Error"
