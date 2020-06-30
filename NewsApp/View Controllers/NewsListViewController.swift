@@ -25,6 +25,7 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "News"
         configureTableView()
         newsListViewModel = NewsListViewModel(delegate:self)
         showNews()

@@ -119,20 +119,19 @@
 		DF401DBE24AA3258000A8835 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DF401DBF24AA3258000A8835 /* AppDelegate.swift */,
+				DF401DC124AA3258000A8835 /* SceneDelegate.swift */,
+				DFD0BB1124ABFB2E00D5F6CF /* Constants */,
 				DFB9969624AAAEC700FFA258 /* Extensions */,
 				DF401DF824AA425C000A8835 /* Helpers */,
 				DF401DF524AA41F2000A8835 /* View Models */,
 				DF401DF024AA3D16000A8835 /* Models */,
 				DF401DEE24AA3C63000A8835 /* Views */,
 				DF401DED24AA3C58000A8835 /* View Controllers */,
-				DF401DBF24AA3258000A8835 /* AppDelegate.swift */,
-				DF401DC124AA3258000A8835 /* SceneDelegate.swift */,
 				DF401DC824AA325B000A8835 /* Assets.xcassets */,
 				DF401DCA24AA325B000A8835 /* LaunchScreen.storyboard */,
 				DF401DCD24AA325B000A8835 /* Info.plist */,
 				DF401DF324AA3ECD000A8835 /* News.json */,
-				DFD0BB0324ABC23800D5F6CF /* Constants.swift */,
-				DFD0BB0D24ABEA4B00D5F6CF /* NetworkConstants.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -213,6 +212,15 @@
 				DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DFD0BB1124ABFB2E00D5F6CF /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DFD0BB0324ABC23800D5F6CF /* Constants.swift */,
+				DFD0BB0D24ABEA4B00D5F6CF /* NetworkConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,7 +508,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.manali.NewsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -518,7 +526,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.manali.NewsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

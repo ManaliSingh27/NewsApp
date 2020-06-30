@@ -9,10 +9,10 @@
 import Foundation
 
 struct ErrorConstants {
-    static let kParsingFailedError: String = "Parsing Failed"
+    static let kParsingFailedError: String = "There seems to be some issue. Please try again later"
     static let kError: String = "Error"
-    static let kNoInternetError: String = "No Internet Connectivity"
-    static let kErrorAPIResponse: String = "There is some issue in response"
+    static let kNoInternetError: String = "There seems to be some problem in network. Please try again later"
+    static let kErrorAPIResponse: String = "There seems to be some issue. Please try again later"
     static let kErrorAPINoData: String = "There is no data to show"
 }
 

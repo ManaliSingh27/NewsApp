@@ -56,7 +56,6 @@ class NewsListViewModel: NSObject {
             switch(result)
             {
             case .Success(let data):
-                let str = String(decoding: data, as: UTF8.self)
                 let parserManager = Parser(dataParser: self!.parserObj)
                 parserManager.parseResponse(data: data, completion: {[weak self] (result) in
                     guard let self = self else { return }

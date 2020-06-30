@@ -41,7 +41,6 @@ final class NewsParser: ParseData {
             completion(.success(response))
         } catch {
             completion(.error(ErrorConstants.kParsingFailedError))
-            print(error)
         }
         
     }

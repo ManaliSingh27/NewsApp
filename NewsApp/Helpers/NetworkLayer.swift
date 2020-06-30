@@ -50,6 +50,12 @@ class NetworkManager {
         let sessionDataTask = session.dataTask(with: url, completionHandler: {data, response, error
             in
             guard error == nil else {return completion(.Error(error?.localizedDescription ?? ErrorConstants.kErrorAPIResponse))}
+            let response = response as! HTTPURLResponse
+            let status = response.statusCode
+            guard (200...299).contains(status) else {
+                completion(.Error(ErrorConstants.kErrorAPIResponse))
+                return
+            }
             guard let data = data else {return completion(.Error(error?.localizedDescription ?? ErrorConstants.kErrorAPINoData))}
             completion(.Success(data))
         })
