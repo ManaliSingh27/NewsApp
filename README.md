@@ -7,7 +7,7 @@ Simple iPhone App to show News Items from https://newsapi.org/
 ## Features
 
 1. News List Screen
- * Displays List of News Items
+ * Displays List of News Items based on the Region settings of Device
  * Displays image and News Title
  * Pull to Refresh feature to download latest news
 
