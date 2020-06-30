@@ -63,7 +63,7 @@ class NetworkManager {
     /// - parameter completion: completion handler
     public func downloadImageWithUrl(url : URL, completion : @escaping (ImageResult<[AnyObject]>) -> Void)
     {
-        let sessionDataTask   = session.dataTask(with:url , completionHandler: {[weak self]
+        let sessionDataTask   = session.dataTask(with:url , completionHandler: {
             data,response, error in
             guard error == nil else { return completion(.Error) }
             guard let data = data else { return completion(.Error)

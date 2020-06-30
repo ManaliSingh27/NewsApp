@@ -26,7 +26,6 @@ class NewsDetailViewController: UIViewController {
         showNewsDetails()
         guard newsViewModel.newsUrl != nil else { return }
         openUrlButton.isHidden = false
-        // Do any additional setup after loading the view.
     }
 
     private func showNewsDetails() {
@@ -38,22 +37,14 @@ class NewsDetailViewController: UIViewController {
         dateLabel.text = newsViewModel.publishedDate
     }
 
+    // Opens the url on browser
     @IBAction func openNewsUrl(_ sender: UIButton) {
         guard let url = URL(string: newsViewModel.newsUrl!) else { return }
         UIApplication.shared.open(url)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: - News Image Download Delegate
 extension NewsDetailViewController: NewsImageDownloaded {
     func newsImageDownloaded(image: UIImage) {
         DispatchQueue.main.async {

@@ -14,7 +14,7 @@ enum ParserResult<T> {
 }
 
 protocol ParseData {
-    func parseJson(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void)
+    func parseResponse(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void)
 }
 
 class Parser {
@@ -24,17 +24,18 @@ class Parser {
         self.dataParserObj = dataParser
     }
     
-    func parseJson(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void) {
-        dataParserObj.parseJson(data: data, completion: {(result) in
+    func parseResponse(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void) {
+        dataParserObj.parseResponse(data: data, completion: {(result) in
             completion(result)
         })
     }
 }
 
 final class NewsParser: ParseData {
-    
-    func parseJson(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void) {
-        
+    /// Parse the data and returns success or failure
+    /// - parameter data: Response
+    /// - parameter completion : completion handler
+    func parseResponse(data: Data, completion: @escaping(_ result: ParserResult<Any>) -> Void) {
         do {
             let response = try JSONDecoder().decode(Articles.self, from: data)
             completion(.success(response))

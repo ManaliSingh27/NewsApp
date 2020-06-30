@@ -12,18 +12,22 @@ class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var newsListViewModel: NewsListViewModel!
-    let activityIndicator = UIActivityIndicatorView()
-
+    lazy var activityIndicator = UIActivityIndicatorView()
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(handleRefresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.black
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         newsListViewModel = NewsListViewModel(delegate:self)
-        guard currentReachabilityStatus != .notReachable else {
-            self.showAlert(title:ErrorConstants.kError, message: ErrorConstants.kNoInternetError)
-            return
-        }
-        setActivityIndicator()
-        newsListViewModel.downloadNewsData()
+        showNews()
     }
     
     private func configureTableView() -> Void {
@@ -31,29 +35,28 @@ class NewsListViewController: UIViewController {
         self.tableView.register(nib, forCellReuseIdentifier: UIConstants.kNewsCellIdentifier)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
+        self.tableView.addSubview(self.refreshControl)
+        
     }
     
-    private func setActivityIndicator() {
-           if #available(iOS 13.0, *) {
-               activityIndicator.style = .large
-           } else {
-               activityIndicator.style = .whiteLarge
-           }
-           self.showActivityIndicatory(activityIndicator: activityIndicator)
-       }
+    // Checks Internet connectivity and downloads News data
+    private func showNews() {
+        guard currentReachabilityStatus != .notReachable else {
+            self.showAlert(title:ErrorConstants.kError, message: ErrorConstants.kNoInternetError)
+            return
+        }
+        self.showActivityIndicatory(activityIndicator: activityIndicator)
+        newsListViewModel.downloadNewsData()
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    // MARK: - Refresh Control
+    @objc private func handleRefresh(_ refreshControl: UIRefreshControl) {
+        showNews()
+        refreshControl.endRefreshing()
+    }
 }
 
+// MARK: - Table view Data Source
 extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.newsListViewModel.numberOfNewsItems()
@@ -68,8 +71,8 @@ extension NewsListViewController: UITableViewDataSource {
     
 }
 
+// MARK: - Table view delegates
 extension NewsListViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = NewsDetailViewController(nibName: UIConstants.kNewsDetailViewsControllerXib, bundle: nil)
         vc.newsViewModel = self.newsListViewModel.newsAtIndex(index:indexPath.row)
@@ -77,6 +80,7 @@ extension NewsListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - News View Model delegates
 extension NewsListViewController: NewsListViewModelDelegate {
     func parseNewsItemsSuccess() {
         DispatchQueue.main.async {

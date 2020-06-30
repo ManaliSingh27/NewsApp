@@ -17,14 +17,13 @@ protocol NewsImageDownloaded : class
 class NewsViewModel: NSObject {
     
     private var newsItem: News
-    private let imageDownloader: ImageDownloader = ImageDownloader()
     private var imageNews: UIImage? {
         didSet {
             self.delegate?.newsImageDownloaded(image: self.imageNews!)
         }
     }
     weak var delegate : NewsImageDownloaded?
-
+    
     init(newsItem: News) {
         self.newsItem = newsItem
     }
@@ -59,14 +58,25 @@ class NewsViewModel: NSObject {
     }
     
     private func downloadNewsImages() {
-        guard (newsItem.urlToImage != nil) else{return }
-        
-        imageDownloader.downloadImage(photoUrl:newsItem.urlToImage! , completion: {
-            (image) in
-            self.imageNews = image
+        let networkManager = NetworkManager(session: URLSession.shared)
+        guard let newsImageUrl = newsItem.urlToImage else {
+            self.imageNews = UIImage(named: "NewsPlaceholder")
+            return }
+        let url = URL(string: newsImageUrl)
+        guard url != nil else {return}
+        guard  ImageCache.getImage(url: url!) == nil else {
+            self.imageNews = ImageCache.getImage(url: url!)
+            return
+        }
+        networkManager.downloadImageWithUrl(url: url!, completion: {
+            (result) in
+            switch(result)
+            {
+            case .Success(let image):
+                self.imageNews = image
+            case .Error:
+                self.imageNews = UIImage(named: "NewsPlaceholder")
+            }
         })
     }
-    
-    
-   
 }

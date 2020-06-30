@@ -32,31 +32,33 @@ class NewsListViewModel: NSObject {
         return "US"
     }
     
+    private var newsUrlSession: URLSession {
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = [
+            "Accept": "application/json",
+            "X-Api-Key": NetworkConstants.API_KEY
+        ]
+        return URLSession(configuration: config)
+    }
+    
     init(delegate: NewsListViewModelDelegate?) {
         self.newsItems = [News]()
         self.delegate = delegate
     }
     
-    
+    // Downloads News Data and Parse the Response
     func downloadNewsData()
     {
-        let urlString = "https://newsapi.org/v2/top-headlines?country=\(countryCode)"
-        let newsUrl = URL(string: urlString)
-        let config = URLSessionConfiguration.default
-
-        config.httpAdditionalHeaders = [
-            "Accept": "application/json",
-            "X-Api-Key": NetworkConstants.API_KEY
-        ]
-
-        let urlSession = URLSession(configuration: config)
-        let networkManager = NetworkManager(session: urlSession)
+        let urlEndPoint = UrlEndpoint.getNewsUrl(query: countryCode)
+        let newsUrl = urlEndPoint.url
+        let networkManager = NetworkManager(session: newsUrlSession)
         networkManager.downloadData(url: newsUrl!, completion: {[weak self](result) in
             switch(result)
             {
             case .Success(let data):
+                let str = String(decoding: data, as: UTF8.self)
                 let parserManager = Parser(dataParser: self!.parserObj)
-                parserManager.parseJson(data: data, completion: {[weak self] (result) in
+                parserManager.parseResponse(data: data, completion: {[weak self] (result) in
                     guard let self = self else { return }
                     switch result {
                     case .success(let newsResponse):
@@ -72,12 +74,15 @@ class NewsListViewModel: NSObject {
         })
     }
     
-    
+    /// Returns the number of news items
+    /// - returns:  Count of News Items
     func numberOfNewsItems() -> Int {
         return self.newsItems.count
     }
     
-    
+    /// Returns the News View Model based on the the row index
+    /// - parameter index: Index of the row to get the News View Model
+    /// - returns:  News View Model
     func newsAtIndex(index: Int) -> NewsViewModel {
         return NewsViewModel(newsItem: self.newsItems[index])
     }
