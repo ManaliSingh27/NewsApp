@@ -14,6 +14,7 @@ protocol NewsListViewModelDelegate: class {
     func parseNewsItemsFailureWithMessage(message: String)
 }
 
+
 class NewsListViewModel: NSObject {
     private var parserObj  = NewsParser()
     weak var delegate: NewsListViewModelDelegate?
@@ -46,11 +47,11 @@ class NewsListViewModel: NSObject {
                         let article: Articles = newsResponse as! Articles
                         self.newsItems = article.articles
                     case .error(let error):
-                        print(error)
+                        self.delegate?.parseNewsItemsFailureWithMessage(message: error)
                     }
                 })
             case .Error(let error):
-                print(error)
+                self?.delegate?.parseNewsItemsFailureWithMessage(message: error)
             }
         })
     }

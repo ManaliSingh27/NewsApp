@@ -26,6 +26,9 @@
 		DF401E0524AA9866000A8835 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF401E0324AA9866000A8835 /* NewsDetailViewController.swift */; };
 		DF401E0624AA9866000A8835 /* NewsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF401E0424AA9866000A8835 /* NewsDetailViewController.xib */; };
 		DFB9969524AAAD8000FFA258 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB9969424AAAD8000FFA258 /* String+Util.swift */; };
+		DFD0BAFE24AB5D0300D5F6CF /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */; };
+		DFD0BB0224AB639B00D5F6CF /* NSObject+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */; };
+		DFF5DB6124AAB65300D5C1D6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,9 @@
 		DF401E0324AA9866000A8835 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		DF401E0424AA9866000A8835 /* NewsDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsDetailViewController.xib; sourceTree = "<group>"; };
 		DFB9969424AAAD8000FFA258 /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
+		DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
+		DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Util.swift"; sourceTree = "<group>"; };
+		DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +185,7 @@
 				DF401DF924AA426D000A8835 /* Parser.swift */,
 				DF401DFD24AA70BB000A8835 /* NetworkLayer.swift */,
 				DF401DFF24AA82E7000A8835 /* ImageDownloader.swift */,
+				DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -187,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				DFB9969424AAAD8000FFA258 /* String+Util.swift */,
+				DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */,
+				DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -295,7 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFD0BAFE24AB5D0300D5F6CF /* UIViewController+Util.swift in Sources */,
 				DF401E0524AA9866000A8835 /* NewsDetailViewController.swift in Sources */,
+				DFF5DB6124AAB65300D5C1D6 /* ImageCache.swift in Sources */,
 				DF401DFE24AA70BB000A8835 /* NetworkLayer.swift in Sources */,
 				DF401DC024AA3258000A8835 /* AppDelegate.swift in Sources */,
 				DF401DC224AA3258000A8835 /* SceneDelegate.swift in Sources */,
@@ -307,6 +318,7 @@
 				DF401DF724AA4206000A8835 /* NewsListViewModel.swift in Sources */,
 				DF401DFA24AA426D000A8835 /* Parser.swift in Sources */,
 				DF401DFC24AA4CA5000A8835 /* NewsViewModel.swift in Sources */,
+				DFD0BB0224AB639B00D5F6CF /* NSObject+Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

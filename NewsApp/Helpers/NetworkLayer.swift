@@ -69,11 +69,11 @@ class NetworkManager {
             guard error == nil else { return completion(.Error) }
             guard let data = data else { return completion(.Error)
             }
-            if let cachedImage = self?.imageCache.object(forKey: url.absoluteString as NSString) {
+            if let cachedImage = ImageCache.getImage(url: url) {
                 completion(.Success(cachedImage))
             } else {
                 let image = UIImage.init(data: data)
-                self?.imageCache.setObject(image!, forKey: url.absoluteString as NSString)
+                ImageCache.saveImage(image: image, url: url)
                 completion(.Success(image!))
             }
             

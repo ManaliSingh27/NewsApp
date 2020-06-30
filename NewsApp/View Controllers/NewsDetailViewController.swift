@@ -35,7 +35,7 @@ class NewsDetailViewController: UIViewController {
         authorLabel.text = newsViewModel.authorName
         contentLabel.text = newsViewModel.contentText
         descriptionLabel.text = newsViewModel.descriptionText
-        dateLabel.text = newsViewModel.publishedDate.formattedPublishedDate()
+        dateLabel.text = newsViewModel.publishedDate
     }
 
     @IBAction func openNewsUrl(_ sender: UIButton) {

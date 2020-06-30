@@ -12,13 +12,18 @@ class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var newsListViewModel: NewsListViewModel!
-    
+    let activityIndicator = UIActivityIndicatorView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         newsListViewModel = NewsListViewModel(delegate:self)
+        guard currentReachabilityStatus != .notReachable else {
+            self.showAlert(title:"Error", message: "No Internet Connectivity")
+            return
+        }
+        setActivityIndicator()
         newsListViewModel.downloadNewsData()
-        // Do any additional setup after loading the view.
     }
     
     private func configureTableView() -> Void {
@@ -27,6 +32,15 @@ class NewsListViewController: UIViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
     }
+    
+    private func setActivityIndicator() {
+           if #available(iOS 13.0, *) {
+               activityIndicator.style = .large
+           } else {
+               activityIndicator.style = .whiteLarge
+           }
+           self.showActivityIndicatory(activityIndicator: activityIndicator)
+       }
     
     /*
      // MARK: - Navigation
@@ -66,12 +80,16 @@ extension NewsListViewController: UITableViewDelegate {
 extension NewsListViewController: NewsListViewModelDelegate {
     func parseNewsItemsSuccess() {
         DispatchQueue.main.async {
+            self.removeActivityIndicator(activityIndicator: self.activityIndicator)
             self.tableView.reloadData()
         }
     }
     
     func parseNewsItemsFailureWithMessage(message: String) {
-        
+        DispatchQueue.main.async {
+            self.removeActivityIndicator(activityIndicator: self.activityIndicator)
+            self.showAlert(title:"Error", message: message)
+        }
     }
     
     

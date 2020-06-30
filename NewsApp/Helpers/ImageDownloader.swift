@@ -25,6 +25,10 @@ struct ImageDownloader : ImageDownloadable
         {
             return
         }
+        if let cachedImage = ImageCache.getImage(url: url!) {
+            completion(cachedImage)
+        }
+        
         networkManager.downloadImageWithUrl(url: url!, completion: {
             (result) in
             switch(result)
