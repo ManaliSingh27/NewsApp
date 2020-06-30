@@ -46,7 +46,7 @@ class NewsViewModel: NSObject {
     }
     
     var publishedDate: String {
-        return self.newsItem.publishedAt?.newsPublishedDate ?? ""
+        return self.newsItem.publishedAt?.dateFormattedString ?? ""
     }
     
     var newsUrl: String? {

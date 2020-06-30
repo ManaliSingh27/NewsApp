@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
     
-    var newsPublishedDate: String? {
+    var dateFormattedString: String? {
         var publishedDate: String?
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -20,4 +20,5 @@ extension String {
         }
         return publishedDate
     }
+    
 }

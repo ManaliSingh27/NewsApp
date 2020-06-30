@@ -18,10 +18,18 @@ protocol NewsListViewModelDelegate: class {
 class NewsListViewModel: NSObject {
     private var parserObj  = NewsParser()
     weak var delegate: NewsListViewModelDelegate?
+    
     private var newsItems: [News] {
         didSet {
             self.delegate?.parseNewsItemsSuccess()
         }
+    }
+    
+    private var countryCode: String {
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            return countryCode
+        }
+        return "US"
     }
     
     init(delegate: NewsListViewModelDelegate?) {
@@ -32,9 +40,17 @@ class NewsListViewModel: NSObject {
     
     func downloadNewsData()
     {
-        let urlString = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4b68ccfbd2034033ad1fdd79dc30bfc9"
+        let urlString = "https://newsapi.org/v2/top-headlines?country=\(countryCode)"
         let newsUrl = URL(string: urlString)
-        let networkManager = NetworkManager(session: URLSession.shared)
+        let config = URLSessionConfiguration.default
+
+        config.httpAdditionalHeaders = [
+            "Accept": "application/json",
+            "X-Api-Key": NetworkConstants.API_KEY
+        ]
+
+        let urlSession = URLSession(configuration: config)
+        let networkManager = NetworkManager(session: urlSession)
         networkManager.downloadData(url: newsUrl!, completion: {[weak self](result) in
             switch(result)
             {
@@ -65,4 +81,5 @@ class NewsListViewModel: NSObject {
     func newsAtIndex(index: Int) -> NewsViewModel {
         return NewsViewModel(newsItem: self.newsItems[index])
     }
+    
 }

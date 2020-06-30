@@ -97,8 +97,6 @@
                         <constraint firstItem="eZg-SU-aEl" firstAttribute="leading" secondItem="fuA-CC-Mn3" secondAttribute="leading" id="zAj-cg-oZP"/>
                         <constraint firstAttribute="bottom" secondItem="eZg-SU-aEl" secondAttribute="bottom" constant="8" id="zVq-vW-Clo"/>
                     </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="zYd-ey-DuV"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="mYJ-zt-zUd"/>
                 </scrollView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udk-mB-Zcb">
                     <rect key="frame" x="107" y="812" width="200" height="30"/>

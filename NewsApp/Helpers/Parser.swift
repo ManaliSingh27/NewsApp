@@ -39,7 +39,7 @@ final class NewsParser: ParseData {
             let response = try JSONDecoder().decode(Articles.self, from: data)
             completion(.success(response))
         } catch {
-            completion(.error("Some error occured"))
+            completion(.error(ErrorConstants.kParsingFailedError))
             print(error)
         }
         

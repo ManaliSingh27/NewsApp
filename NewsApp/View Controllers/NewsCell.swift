@@ -30,6 +30,11 @@ class NewsCell: UITableViewCell, NewsImageDownloaded {
         self.newsImageView.image = viewModel.newsImage
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        newsImageView.image = nil
+    }
+    
     func newsImageDownloaded(image: UIImage) {
         DispatchQueue.main.async {
             self.newsImageView.image = image

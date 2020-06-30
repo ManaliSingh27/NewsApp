@@ -35,7 +35,6 @@ protocol URLSessionDataTaskProtocol
 class NetworkManager {
     
     private let session : URLSessionProtocol
-    let imageCache = NSCache<NSString, UIImage>()
     
     init(session : URLSessionProtocol) {
         self.session = session
@@ -50,8 +49,8 @@ class NetworkManager {
     {
         let sessionDataTask = session.dataTask(with: url, completionHandler: {data, response, error
             in
-            guard error == nil else {return completion(.Error(error?.localizedDescription ?? "There is some issue in response"))}
-            guard let data = data else {return completion(.Error(error?.localizedDescription ?? "There is no data to show"))}
+            guard error == nil else {return completion(.Error(error?.localizedDescription ?? ErrorConstants.kErrorAPIResponse))}
+            guard let data = data else {return completion(.Error(error?.localizedDescription ?? ErrorConstants.kErrorAPINoData))}
             completion(.Success(data))
         })
         sessionDataTask.resume()

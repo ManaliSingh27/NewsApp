@@ -28,6 +28,7 @@
 		DFB9969524AAAD8000FFA258 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB9969424AAAD8000FFA258 /* String+Util.swift */; };
 		DFD0BAFE24AB5D0300D5F6CF /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */; };
 		DFD0BB0224AB639B00D5F6CF /* NSObject+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */; };
+		DFD0BB0424ABC23800D5F6CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0324ABC23800D5F6CF /* Constants.swift */; };
 		DFF5DB6124AAB65300D5C1D6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		DFB9969424AAAD8000FFA258 /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Util.swift"; sourceTree = "<group>"; };
+		DFD0BB0324ABC23800D5F6CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 				DF401DCA24AA325B000A8835 /* LaunchScreen.storyboard */,
 				DF401DCD24AA325B000A8835 /* Info.plist */,
 				DF401DF324AA3ECD000A8835 /* News.json */,
+				DFD0BB0324ABC23800D5F6CF /* Constants.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				DF401DC024AA3258000A8835 /* AppDelegate.swift in Sources */,
 				DF401DC224AA3258000A8835 /* SceneDelegate.swift in Sources */,
 				DF401DEB24AA3923000A8835 /* NewsCell.swift in Sources */,
+				DFD0BB0424ABC23800D5F6CF /* Constants.swift in Sources */,
 				DF401DF224AA3D25000A8835 /* News.swift in Sources */,
 				DF401DE324AA33FA000A8835 /* NewsListViewController.swift in Sources */,
 				DF401E0024AA82E7000A8835 /* ImageDownloader.swift in Sources */,

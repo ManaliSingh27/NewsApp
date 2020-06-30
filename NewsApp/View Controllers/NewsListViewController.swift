@@ -19,7 +19,7 @@ class NewsListViewController: UIViewController {
         configureTableView()
         newsListViewModel = NewsListViewModel(delegate:self)
         guard currentReachabilityStatus != .notReachable else {
-            self.showAlert(title:"Error", message: "No Internet Connectivity")
+            self.showAlert(title:ErrorConstants.kError, message: ErrorConstants.kNoInternetError)
             return
         }
         setActivityIndicator()
@@ -27,8 +27,8 @@ class NewsListViewController: UIViewController {
     }
     
     private func configureTableView() -> Void {
-        let nib = UINib.init(nibName: "NewsCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "newsCell")
+        let nib = UINib.init(nibName: UIConstants.kNewsCellXib, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: UIConstants.kNewsCellIdentifier)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44
     }
@@ -60,7 +60,7 @@ extension NewsListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: NewsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsCell
+        let cell: NewsCell = tableView.dequeueReusableCell(withIdentifier: UIConstants.kNewsCellIdentifier, for: indexPath) as! NewsCell
         let newsViewModel: NewsViewModel = self.newsListViewModel.newsAtIndex(index:indexPath.row)
         cell.configureCell(viewModel: newsViewModel)
         return cell
@@ -71,7 +71,7 @@ extension NewsListViewController: UITableViewDataSource {
 extension NewsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = NewsDetailViewController(nibName: "NewsDetailViewController", bundle: nil)
+        let vc = NewsDetailViewController(nibName: UIConstants.kNewsDetailViewsControllerXib, bundle: nil)
         vc.newsViewModel = self.newsListViewModel.newsAtIndex(index:indexPath.row)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -88,7 +88,7 @@ extension NewsListViewController: NewsListViewModelDelegate {
     func parseNewsItemsFailureWithMessage(message: String) {
         DispatchQueue.main.async {
             self.removeActivityIndicator(activityIndicator: self.activityIndicator)
-            self.showAlert(title:"Error", message: message)
+            self.showAlert(title:ErrorConstants.kError, message: message)
         }
     }
     
