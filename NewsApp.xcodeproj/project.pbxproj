@@ -32,6 +32,7 @@
 		DFD0BB0824ABC9D100D5F6CF /* UrlEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0724ABC9D100D5F6CF /* UrlEndPoint.swift */; };
 		DFD0BB0A24ABDC0C00D5F6CF /* NewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0924ABDC0C00D5F6CF /* NewsModelTests.swift */; };
 		DFD0BB0C24ABDED200D5F6CF /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0B24ABDED200D5F6CF /* HelperTests.swift */; };
+		DFD0BB0E24ABEA4B00D5F6CF /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0D24ABEA4B00D5F6CF /* NetworkConstants.swift */; };
 		DFF5DB6124AAB65300D5C1D6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		DFD0BB0724ABC9D100D5F6CF /* UrlEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlEndPoint.swift; sourceTree = "<group>"; };
 		DFD0BB0924ABDC0C00D5F6CF /* NewsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModelTests.swift; sourceTree = "<group>"; };
 		DFD0BB0B24ABDED200D5F6CF /* HelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
+		DFD0BB0D24ABEA4B00D5F6CF /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		DFF5DB6024AAB65300D5C1D6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 				DF401DCD24AA325B000A8835 /* Info.plist */,
 				DF401DF324AA3ECD000A8835 /* News.json */,
 				DFD0BB0324ABC23800D5F6CF /* Constants.swift */,
+				DFD0BB0D24ABEA4B00D5F6CF /* NetworkConstants.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				DF401DF724AA4206000A8835 /* NewsListViewModel.swift in Sources */,
 				DF401DFA24AA426D000A8835 /* Parser.swift in Sources */,
 				DF401DFC24AA4CA5000A8835 /* NewsViewModel.swift in Sources */,
+				DFD0BB0E24ABEA4B00D5F6CF /* NetworkConstants.swift in Sources */,
 				DFD0BB0224AB639B00D5F6CF /* NSObject+Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6N6AJ67269;
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -504,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6N6AJ67269;
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
