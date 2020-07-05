@@ -34,8 +34,8 @@ protocol URLSessionDataTaskProtocol
 
 class NetworkManager {
     
-    private let session : URLSessionProtocol
-    
+    private var session : URLSessionProtocol
+   // lazy private var imageDownloadTasks = [URL:URLSessionTask]()
     init(session : URLSessionProtocol) {
         self.session = session
     }
@@ -69,7 +69,7 @@ class NetworkManager {
     /// - parameter completion: completion handler
     public func downloadImageWithUrl(url : URL, completion : @escaping (ImageResult<[AnyObject]>) -> Void)
     {
-        let sessionDataTask   = session.dataTask(with:url , completionHandler: {
+        var sessionDataTask = session.dataTask(with:url , completionHandler: {
             data,response, error in
             guard error == nil else { return completion(.Error) }
             guard let data = data else { return completion(.Error)
@@ -81,9 +81,17 @@ class NetworkManager {
                 ImageCache.saveImage(image: image, url: url)
                 completion(.Success(image ?? UIImage(named: "NewsPlaceholder")!))
             }
-            
         })
         sessionDataTask.resume()
+    }
+    
+    public func cancelDownloadForTask(withURL url: URL) {
+        (session as! URLSession).getAllTasks { tasks in
+          tasks
+            .filter { $0.state == .running }
+            .filter { $0.originalRequest?.url == url }.first?
+            .cancel()
+        }
     }
     
 }
@@ -103,6 +111,7 @@ class MockURLSession: URLSessionProtocol {
 extension URLSession: URLSessionProtocol {
     func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let task  = dataTask(with: url, completionHandler: (completionHandler)) as URLSessionDataTask
+        task.taskDescription = url.absoluteString
         return task
     }
 }
@@ -114,6 +123,7 @@ extension URLSessionDataTask: URLSessionDataTaskProtocol {
 
 
 class MockURLSessionDataTask: URLSessionDataTaskProtocol {
+    
     private (set) var resumeWasCalled = false
     func resume() {
         resumeWasCalled = true

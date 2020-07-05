@@ -12,12 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var appCoorinator: AppCoordinator?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
       window = UIWindow(frame: UIScreen.main.bounds)
       let navgiationController = UINavigationController()
-      navgiationController.pushViewController(NewsListViewController(), animated: false)
+      appCoorinator = AppCoordinator(navigationController: navgiationController)
+      appCoorinator?.start()
       window!.rootViewController = navgiationController
       window!.makeKeyAndVisible()
         return true
