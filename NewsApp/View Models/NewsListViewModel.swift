@@ -58,7 +58,7 @@ class NewsListViewModel: NSObject {
         self.networkManager!.downloadData(url: newsUrl!, completion: {[weak self](result) in
             switch(result)
             {
-            case .Success(let data):
+            case .success(let data):
                 let parserManager = Parser(dataParser: self!.parserObj)
                 parserManager.parseResponse(data: data, completion: {[weak self] (result) in
                     guard let self = self else { return }
@@ -66,12 +66,13 @@ class NewsListViewModel: NSObject {
                     case .success(let newsResponse):
                         let article: Articles = newsResponse as! Articles
                         self.newsItems = article.articles
-                    case .error(let error):
-                        self.delegate?.parseNewsItemsFailureWithMessage(message: error)
+                    case .failure(let error):
+                        
+                        self.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
                     }
                 })
-            case .Error(let error):
-                self?.delegate?.parseNewsItemsFailureWithMessage(message: error)
+            case .failure(let error):
+                self?.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
             }
         })
     }

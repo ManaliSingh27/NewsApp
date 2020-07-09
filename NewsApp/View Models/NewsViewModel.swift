@@ -76,9 +76,9 @@ class NewsViewModel: NSObject {
             (result) in
             switch(result)
             {
-            case .Success(let image):
+            case .success(let image):
                 self.imageNews = image
-            case .Error:
+            case .failure( _):
                 self.imageNews = UIImage(named: "NewsPlaceholder")
             }
         })
