@@ -8,13 +8,9 @@
 
 import Foundation
 import UIKit
+import Combine
 
-//
-//enum ImageResult<T>
-//{
-//    case Success(UIImage)
-//    case Error
-//}
+
 enum CustomError: String, Error {
     case authenticationError
     case downloadError
@@ -31,33 +27,49 @@ extension CustomError: LocalizedError {
     }
 }
 
-protocol URLSessionProtocol
-{
-    typealias DataTaskResult = (Data?, URLResponse?, Error?) -> Void
-    func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
-}
-
-protocol URLSessionDataTaskProtocol
-{
-    func resume()
-}
 
 
 class NetworkManager {
     
-    private var session : URLSessionProtocol
-   // lazy private var imageDownloadTasks = [URL:URLSessionTask]()
-    init(session : URLSessionProtocol) {
-        self.session = session
+    // private var session: URLSession = URLSession.shared
+    
+    private var session: URLSession {
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = [
+            "Accept": "application/json",
+            "X-Api-Key": NetworkConstants.API_KEY
+        ]
+        return URLSession(configuration: config)
     }
     
+    
+    public func downloadNews(url:URL) -> AnyPublisher<Articles, Error>{
+        var dataPublisher: AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
+        dataPublisher = session
+            .dataTaskPublisher(for: url)
+            .eraseToAnyPublisher()
+        return dataPublisher
+            .tryMap { output in
+                guard let response = output.response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                    throw CustomError.downloadError
+                }
+                return output.data
+        }
+    .retry(3)
+        .decode(type: Articles.self, decoder: JSONDecoder())
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    
     // MARK: - Download Data
-       
-       // Downloads Data for the url passed as parameter
-       /// - parameter url: url of image to be downloaded
-       /// - parameter completion: completion handler
+    
+    // Downloads Data for the url passed as parameter
+    /// - parameter url: url of image to be downloaded
+    /// - parameter completion: completion handler
     public func downloadData(url : URL, completion : @escaping(_ result : Result<Data, CustomError>) -> Void)
     {
+        
         let sessionDataTask = session.dataTask(with: url, completionHandler: {data, response, error
             in
             guard error == nil else {return completion(.failure(CustomError.downloadError))}
@@ -98,48 +110,10 @@ class NetworkManager {
     
     public func cancelDownloadForTask(withURL url: URL) {
         (session as! URLSession).getAllTasks { tasks in
-          tasks
-            .filter { $0.state == .running }
-            .filter { $0.originalRequest?.url == url }.first?
-            .cancel()
+            tasks
+                .filter { $0.state == .running }
+                .filter { $0.originalRequest?.url == url }.first?
+                .cancel()
         }
     }
-    
 }
-
-
-class MockURLSession: URLSessionProtocol {
-    private (set) var lastUrl : URL!
-    var nextDataTask = MockURLSessionDataTask()
-    func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        lastUrl = url
-        return nextDataTask
-    }
-}
-
-
-
-extension URLSession: URLSessionProtocol {
-    func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let task  = dataTask(with: url, completionHandler: (completionHandler)) as URLSessionDataTask
-        task.taskDescription = url.absoluteString
-        return task
-    }
-}
-
-extension URLSessionDataTask: URLSessionDataTaskProtocol {
-    
-}
-
-
-
-class MockURLSessionDataTask: URLSessionDataTaskProtocol {
-    
-    private (set) var resumeWasCalled = false
-    func resume() {
-        resumeWasCalled = true
-    }
-}
-
-
-

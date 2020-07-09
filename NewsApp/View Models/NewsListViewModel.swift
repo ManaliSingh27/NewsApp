@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 protocol NewsListViewModelDelegate: class {
     func parseNewsItemsSuccess()
@@ -18,7 +19,8 @@ protocol NewsListViewModelDelegate: class {
 class NewsListViewModel: NSObject {
     private var parserObj  = NewsParser()
     weak var delegate: NewsListViewModelDelegate!
-    
+    var subscriptions = [AnyCancellable]()
+
     private var newsItems: [News] {
         didSet {
             self.delegate?.parseNewsItemsSuccess()
@@ -34,14 +36,7 @@ class NewsListViewModel: NSObject {
         return "US"
     }
     
-    private var newsUrlSession: URLSession {
-        let config = URLSessionConfiguration.default
-        config.httpAdditionalHeaders = [
-            "Accept": "application/json",
-            "X-Api-Key": NetworkConstants.API_KEY
-        ]
-        return URLSession(configuration: config)
-    }
+   
     
     init(delegate: NewsListViewModelDelegate?) {
         self.newsItems = [News]()
@@ -54,28 +49,23 @@ class NewsListViewModel: NSObject {
     {
         let urlEndPoint = UrlEndpoint.getNewsUrl(query: countryCode)
         let newsUrl = urlEndPoint.url
-        networkManager = NetworkManager(session: newsUrlSession)
-        self.networkManager!.downloadData(url: newsUrl!, completion: {[weak self](result) in
-            switch(result)
-            {
-            case .success(let data):
-                let parserManager = Parser(dataParser: self!.parserObj)
-                parserManager.parseResponse(data: data, completion: {[weak self] (result) in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(let newsResponse):
-                        let article: Articles = newsResponse as! Articles
-                        self.newsItems = article.articles
+        networkManager = NetworkManager()
+        networkManager?.downloadNews(url: newsUrl!)
+                .sink(receiveCompletion: {completion in
+                    switch(completion){
                     case .failure(let error):
-                        
                         self.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
+                    case .finished:
+                        print("finished")
                     }
-                })
-            case .failure(let error):
-                self?.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
-            }
-        })
+            }, receiveValue: {value in
+                self.newsItems = value.articles
+            })
+        .store(in: &subscriptions)
     }
+    
+    
+    
     
     /// Returns the number of news items
     /// - returns:  Count of News Items
