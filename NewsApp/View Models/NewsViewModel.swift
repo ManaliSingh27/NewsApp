@@ -17,6 +17,8 @@ protocol NewsImageDownloaded : class
 class NewsViewModel: NSObject {
     
     private var newsItem: News
+    private var networkManager: NetworkManager?
+
     private var imageNews: UIImage? {
         didSet {
             self.delegate?.newsImageDownloaded(image: self.imageNews!)
@@ -24,8 +26,9 @@ class NewsViewModel: NSObject {
     }
     weak var delegate : NewsImageDownloaded?
     
-    init(newsItem: News) {
+    init(newsItem: News, networkLayer: NetworkManager?) {
         self.newsItem = newsItem
+        self.networkManager = networkLayer
     }
     
     var newsTitle: String {
@@ -58,7 +61,7 @@ class NewsViewModel: NSObject {
     }
     
     private func downloadNewsImages() {
-        let networkManager = NetworkManager(session: URLSession.shared)
+       // let networkManager = NetworkManager(session: URLSession.shared)
         guard let newsImageUrl = newsItem.urlToImage else {
             self.imageNews = UIImage(named: "NewsPlaceholder")
             return }
@@ -68,15 +71,23 @@ class NewsViewModel: NSObject {
             self.imageNews = ImageCache.getImage(url: url!)
             return
         }
-        networkManager.downloadImageWithUrl(url: url!, completion: {
+        guard self.networkManager != nil else {return}
+        self.networkManager!.downloadImageWithUrl(url: url!, completion: {
             (result) in
             switch(result)
             {
-            case .Success(let image):
+            case .success(let image):
                 self.imageNews = image
-            case .Error:
+            case .failure( _):
                 self.imageNews = UIImage(named: "NewsPlaceholder")
             }
         })
+    }
+    
+    func cancelImageDownloadTasks() {
+        guard let newsImageString = newsItem.urlToImage else {return}
+        guard let url = URL(string: newsImageString) else {return}
+        guard self.networkManager != nil else {return}
+        self.networkManager!.cancelDownloadForTask(withURL: url)
     }
 }

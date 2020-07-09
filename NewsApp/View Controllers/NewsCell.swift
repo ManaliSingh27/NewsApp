@@ -12,6 +12,8 @@ class NewsCell: UITableViewCell, NewsImageDownloaded {
    
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    var newsViewModel: NewsViewModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +26,7 @@ class NewsCell: UITableViewCell, NewsImageDownloaded {
     }
     
     func configureCell(viewModel: NewsViewModel) {
+        newsViewModel = viewModel
         viewModel.delegate = self
         self.titleLabel.text = viewModel.newsTitle
         self.newsImageView.image = nil
@@ -33,6 +36,8 @@ class NewsCell: UITableViewCell, NewsImageDownloaded {
     override func prepareForReuse() {
         super.prepareForReuse()
         newsImageView.image = nil
+        newsViewModel!.cancelImageDownloadTasks()
+        // cancel image download
     }
     
     func newsImageDownloaded(image: UIImage) {

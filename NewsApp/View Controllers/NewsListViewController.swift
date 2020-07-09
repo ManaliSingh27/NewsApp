@@ -13,7 +13,8 @@ class NewsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var newsListViewModel: NewsListViewModel!
     lazy var activityIndicator = UIActivityIndicatorView()
-    
+     var listCoorinator: NewsListCoordinator?
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -75,9 +76,8 @@ extension NewsListViewController: UITableViewDataSource {
 // MARK: - Table view delegates
 extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = NewsDetailViewController(nibName: UIConstants.kNewsDetailViewsControllerXib, bundle: nil)
-        vc.newsViewModel = self.newsListViewModel.newsAtIndex(index:indexPath.row)
-        navigationController?.pushViewController(vc, animated: true)
+        listCoorinator = NewsListCoordinator(navigationController: navigationController!, viewModel:self.newsListViewModel.newsAtIndex(index:indexPath.row) )
+        listCoorinator?.start()
     }
 }
 

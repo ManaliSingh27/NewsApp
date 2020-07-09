@@ -17,13 +17,15 @@ protocol NewsListViewModelDelegate: class {
 
 class NewsListViewModel: NSObject {
     private var parserObj  = NewsParser()
-    weak var delegate: NewsListViewModelDelegate?
+    weak var delegate: NewsListViewModelDelegate!
     
     private var newsItems: [News] {
         didSet {
             self.delegate?.parseNewsItemsSuccess()
         }
     }
+    
+    private var networkManager: NetworkManager?
     
     private var countryCode: String {
         if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
@@ -44,6 +46,7 @@ class NewsListViewModel: NSObject {
     init(delegate: NewsListViewModelDelegate?) {
         self.newsItems = [News]()
         self.delegate = delegate
+        
     }
     
     // Downloads News Data and Parse the Response
@@ -51,11 +54,11 @@ class NewsListViewModel: NSObject {
     {
         let urlEndPoint = UrlEndpoint.getNewsUrl(query: countryCode)
         let newsUrl = urlEndPoint.url
-        let networkManager = NetworkManager(session: newsUrlSession)
-        networkManager.downloadData(url: newsUrl!, completion: {[weak self](result) in
+        networkManager = NetworkManager(session: newsUrlSession)
+        self.networkManager!.downloadData(url: newsUrl!, completion: {[weak self](result) in
             switch(result)
             {
-            case .Success(let data):
+            case .success(let data):
                 let parserManager = Parser(dataParser: self!.parserObj)
                 parserManager.parseResponse(data: data, completion: {[weak self] (result) in
                     guard let self = self else { return }
@@ -63,12 +66,13 @@ class NewsListViewModel: NSObject {
                     case .success(let newsResponse):
                         let article: Articles = newsResponse as! Articles
                         self.newsItems = article.articles
-                    case .error(let error):
-                        self.delegate?.parseNewsItemsFailureWithMessage(message: error)
+                    case .failure(let error):
+                        
+                        self.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
                     }
                 })
-            case .Error(let error):
-                self?.delegate?.parseNewsItemsFailureWithMessage(message: error)
+            case .failure(let error):
+                self?.delegate?.parseNewsItemsFailureWithMessage(message: error.localizedDescription)
             }
         })
     }
@@ -83,7 +87,7 @@ class NewsListViewModel: NSObject {
     /// - parameter index: Index of the row to get the News View Model
     /// - returns:  News View Model
     func newsAtIndex(index: Int) -> NewsViewModel {
-        return NewsViewModel(newsItem: self.newsItems[index])
+        return NewsViewModel(newsItem: self.newsItems[index], networkLayer:networkManager)
     }
     
 }
