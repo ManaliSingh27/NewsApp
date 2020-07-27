@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 protocol NewsImageDownloaded : class
 {
@@ -18,6 +19,7 @@ class NewsViewModel: NSObject {
     
     private var newsItem: News
     private var networkManager: NetworkManager?
+    var subscriptions = [AnyCancellable]()
 
     private var imageNews: UIImage? {
         didSet {
@@ -72,16 +74,15 @@ class NewsViewModel: NSObject {
             return
         }
         guard self.networkManager != nil else {return}
-        self.networkManager!.downloadImageWithUrl(url: url!, completion: {
-            (result) in
-            switch(result)
-            {
-            case .success(let image):
-                self.imageNews = image
-            case .failure( _):
-                self.imageNews = UIImage(named: "NewsPlaceholder")
-            }
+        self.networkManager?.downloadImageWithUrl(url: url!)
+        .sink(receiveCompletion: {completion in
+            print(completion)
+        }, receiveValue: {value in
+            self.imageNews = value
+            ImageCache.saveImage(image: value, url: url!)
         })
+        .store(in: &subscriptions)
+  
     }
     
     func cancelImageDownloadTasks() {

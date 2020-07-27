@@ -28,7 +28,6 @@
 		DFD0BAFE24AB5D0300D5F6CF /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */; };
 		DFD0BB0224AB639B00D5F6CF /* NSObject+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */; };
 		DFD0BB0424ABC23800D5F6CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0324ABC23800D5F6CF /* Constants.swift */; };
-		DFD0BB0624ABC6EE00D5F6CF /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0524ABC6EE00D5F6CF /* NetworkManagerTests.swift */; };
 		DFD0BB0824ABC9D100D5F6CF /* UrlEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0724ABC9D100D5F6CF /* UrlEndPoint.swift */; };
 		DFD0BB0A24ABDC0C00D5F6CF /* NewsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0924ABDC0C00D5F6CF /* NewsModelTests.swift */; };
 		DFD0BB0C24ABDED200D5F6CF /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD0BB0B24ABDED200D5F6CF /* HelperTests.swift */; };
@@ -73,7 +72,6 @@
 		DFD0BAFD24AB5D0300D5F6CF /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		DFD0BB0124AB639B00D5F6CF /* NSObject+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Util.swift"; sourceTree = "<group>"; };
 		DFD0BB0324ABC23800D5F6CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		DFD0BB0524ABC6EE00D5F6CF /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		DFD0BB0724ABC9D100D5F6CF /* UrlEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlEndPoint.swift; sourceTree = "<group>"; };
 		DFD0BB0924ABDC0C00D5F6CF /* NewsModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModelTests.swift; sourceTree = "<group>"; };
 		DFD0BB0B24ABDED200D5F6CF /* HelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 			children = (
 				DF401DD624AA325B000A8835 /* NewsAppTests.swift */,
 				DF401DD824AA325B000A8835 /* Info.plist */,
-				DFD0BB0524ABC6EE00D5F6CF /* NetworkManagerTests.swift */,
 				DFD0BB0924ABDC0C00D5F6CF /* NewsModelTests.swift */,
 				DFD0BB0B24ABDED200D5F6CF /* HelperTests.swift */,
 			);
@@ -363,7 +360,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFD0BB0624ABC6EE00D5F6CF /* NetworkManagerTests.swift in Sources */,
 				DFD0BB0A24ABDC0C00D5F6CF /* NewsModelTests.swift in Sources */,
 				DF401DD724AA325B000A8835 /* NewsAppTests.swift in Sources */,
 				DFD0BB0C24ABDED200D5F6CF /* HelperTests.swift in Sources */,

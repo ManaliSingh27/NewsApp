@@ -61,7 +61,8 @@ class NewsListViewModel: NSObject {
             }, receiveValue: {value in
                 self.newsItems = value.articles
             })
-        .store(in: &subscriptions)
+            .store(in: &subscriptions)
+        
     }
     
     

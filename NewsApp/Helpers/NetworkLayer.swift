@@ -44,6 +44,7 @@ class NetworkManager {
     
     
     public func downloadNews(url:URL) -> AnyPublisher<Articles, Error>{
+
         var dataPublisher: AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
         dataPublisher = session
             .dataTaskPublisher(for: url)
@@ -55,61 +56,29 @@ class NetworkManager {
                 }
                 return output.data
         }
-    .retry(3)
+        .retry(3)
         .decode(type: Articles.self, decoder: JSONDecoder())
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
-    }
-    
-    
-    // MARK: - Download Data
-    
-    // Downloads Data for the url passed as parameter
-    /// - parameter url: url of image to be downloaded
-    /// - parameter completion: completion handler
-    public func downloadData(url : URL, completion : @escaping(_ result : Result<Data, CustomError>) -> Void)
-    {
         
-        let sessionDataTask = session.dataTask(with: url, completionHandler: {data, response, error
-            in
-            guard error == nil else {return completion(.failure(CustomError.downloadError))}
-            let response = response as! HTTPURLResponse
-            let status = response.statusCode
-            guard (200...299).contains(status) else {
-                completion(.failure(CustomError.authenticationError))
-                return
-            }
-            guard let data = data else {return completion(.failure(CustomError.downloadError))}
-            completion(.success(data))
-        })
-        sessionDataTask.resume()
     }
     
-    // MARK: - Download Image
-    
-    // Downloads Image for the url passed as parameter
-    /// - parameter url: url of image to be downloaded
-    /// - parameter completion: completion handler
-    public func downloadImageWithUrl(url : URL, completion : @escaping (Result<UIImage, CustomError>) -> Void)
-    {
-        let sessionDataTask = session.dataTask(with:url , completionHandler: {
-            data,response, error in
-            guard error == nil else { return completion(.failure(CustomError.downloadError)) }
-            guard let data = data else { return completion(.failure(CustomError.downloadError))
-            }
-            if let cachedImage = ImageCache.getImage(url: url) {
-                completion(.success(cachedImage))
-            } else {
-                let image = UIImage.init(data: data)
-                ImageCache.saveImage(image: image, url: url)
-                completion(.success(image ?? UIImage(named: "NewsPlaceholder")!))
-            }
-        })
-        sessionDataTask.resume()
+
+    public func downloadImageWithUrl(url: URL) -> AnyPublisher<UIImage,Never> {
+        var dataPublisher: AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
+        dataPublisher = session
+            .dataTaskPublisher(for: url)
+            .eraseToAnyPublisher()
+        return dataPublisher
+            .map{(UIImage.init(data: $0.data) ?? UIImage(named: "NewsPlaceholder")!)}
+            .replaceError(with: UIImage(named: "NewsPlaceholder")!)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
+    
     
     public func cancelDownloadForTask(withURL url: URL) {
-        (session as! URLSession).getAllTasks { tasks in
+        session.getAllTasks { tasks in
             tasks
                 .filter { $0.state == .running }
                 .filter { $0.originalRequest?.url == url }.first?
